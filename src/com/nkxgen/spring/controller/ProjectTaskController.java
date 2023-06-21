@@ -120,6 +120,13 @@ public class ProjectTaskController {
 		return json;
 	}
 
+	@RequestMapping(value = "/normaltasks", method = RequestMethod.GET)
+	public String viewIndvtasks(@RequestParam("projId") Integer projId, Model model) {
+		List<ProjectTask> tasks = projectTaskService.getTasksByProjectId(projId);
+		model.addAttribute("tasks", tasks);
+		return "normaltasks";
+	}
+
 	// Other controller methods for updating, deleting project tasks
 
 }
