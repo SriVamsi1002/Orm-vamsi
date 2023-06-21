@@ -97,5 +97,13 @@ public class ProjectTaskdao {
 		return filteredTaskDTOs;
 	}
 
+	public List<ProjectTask> getTasksByProjectId(Integer projId) {
+		String jpql = "SELECT t FROM ProjectTask t WHERE t.project.projectId = :projId";
+
+		TypedQuery<ProjectTask> Query = entityManager.createQuery(jpql, ProjectTask.class);
+		Query.setParameter("projId", projId);
+		return Query.getResultList();
+	}
+
 	// Other methods for fetching, updating, and deleting project tasks
 }

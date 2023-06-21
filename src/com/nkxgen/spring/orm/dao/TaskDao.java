@@ -77,8 +77,14 @@ public class TaskDao {
 		return query.getResultList();
 	}
 
-	private User findById(int userId) {
-		return entityManager.find(User.class, userId);
+	public List<Task> getTasksByProjectId(Integer projId) {
+
+		String jpql = "SELECT t FROM Task t WHERE t.project.projectId = :projId";
+
+		TypedQuery<Task> Query = entityManager.createQuery(jpql, Task.class);
+		Query.setParameter("projId", projId);
+		return Query.getResultList();
+
 	}
 
 	// Implement other methods of the TaskDao interface...
